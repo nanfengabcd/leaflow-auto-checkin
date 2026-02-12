@@ -195,7 +195,7 @@ class LeaflowAutoCheckin:
         
         # 等待登录完成
         try:
-            WebDriverWait(self.driver, 20).until(
+            WebDriverWait(self.driver, 30).until(
                 lambda driver: "dashboard" in driver.current_url or "workspaces" in driver.current_url or "login" not in driver.current_url
             )
             
@@ -373,7 +373,7 @@ class LeaflowAutoCheckin:
         self.driver.get("https://checkin.leaflow.net")
         
         # 等待签到页面加载（最多重试3次，每次等待20秒）
-        if not self.wait_for_checkin_page_loaded(max_retries=3, wait_time=20):
+        if not self.wait_for_checkin_page_loaded(max_retries=5, wait_time=30):
             raise Exception("签到页面加载失败，无法找到签到相关元素")
         
         # 查找并点击立即签到按钮
@@ -640,4 +640,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
